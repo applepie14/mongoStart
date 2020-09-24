@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta name="x-ua-compatible" content="IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="UTF-8">
+	
+	<title>로그인</title>
+	<link th:href="@{~/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{~/css/base.css}" rel="stylesheet">
+</head>
+
+<body>
+	
+	<form class="form-signin col-md-6 col-lg-4 col-xl-2 mx-auto mt-5" name="loginform" id="login" action="/loginUser" method="post">
+		<h1 class="font-weight-normal text-center">로그인</h1>
+		
+		<div class="text-center mt-3 loginErrorMsgDiv">
+			<th:block  th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null" >
+				<span th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-danger"></span>
+			</th:block>
+		</div>
+
+		<label for="inputEmail" class="sr-only">아이디</label>
+		<input type="text" id="inputLoginId" name="login_id" class="form-control mt-3" placeholder="아이디" required="" autofocus="">
+		<label for="inputPassword" class="sr-only">비밀번호</label>
+		<input type="password" id="inputPassword" name="login_pwd" class="form-control mt-2" placeholder="비밀번호" required="">
+
+		<button class="btn btn-lg btn-secondary btn-block btn-sm mt-4" type="submit">로그인</button>
+		<p class="mt-3 mb-3 text-muted text-center">© 2020</p>
+	</form>
+	<script th:src="@{~/lib/jquery/jquery.min.js}"></script>
+	<script th:src="@{~/lib/bootstrap/js/bootstrap.bundle.js}"></script>
+	<script th:src="@{~/lib/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+</body>
+</html>

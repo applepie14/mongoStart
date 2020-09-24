@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pro.mongo.mapper.User_mapper">
+	
+	<select id="login" resultType="map" parameterType="map">
+		SELECT
+			*
+		FROM
+			DEFAULT_USER A,
+			default_user_with_proj B 
+		where
+			A.user_no = b.user_no 
+		AND USER_ID = #{login_id} and user_password = #{login_pwd}
+		AND WITH_PROJ in ('mongo_start', 'ALL')
+		group by a.user_id 
+	</select>
+	
+	<select id="getLoginUserInfo" resultType="map" parameterType="string">
+		SELECT
+			USER_ID,
+			USER_PASSWORD,
+			USER_NAME,
+			USER_ROLE
+		FROM
+			DEFAULT_USER A,
+			default_user_with_proj B 
+		where
+			A.user_no = b.user_no 
+		AND USER_ID = #{login_id}
+		AND WITH_PROJ in ('mongo_start', 'ALL')
+		group by a.user_id 
+	</select>
+	
+	
+
+</mapper>

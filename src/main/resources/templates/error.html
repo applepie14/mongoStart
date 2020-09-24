@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta name="x-ua-compatible" content="IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="UTF-8">
+	<title th:text="${#strings.toUpperCase(message)}"></title>
+	<link th:href="@{~/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<style>
+		span.badge {
+		    font-size: 80px;
+		    border-radius: 1rem;
+		    display: block;
+		    width: 500px;
+		    height: 130px;
+		    margin: 50px auto 0;
+		}
+		h1.text-danger {
+		    width: 500px;
+		    margin: 10px auto;
+		}
+		.errorpage {
+		    width: 500px;
+		    height: 130px;
+		    margin: 20px auto;
+		}
+	</style>
+</head>
+<body>
+	<span class="badge mt-5" th:text="${status+' ERROR'}" th:classappend="${status != 404 ? 'badge-warning':'badge-danger'}"></span>
+	<!-- <h1 class="text-center mt-3" th:text="${#strings.toUpperCase(message)}" th:classappend="${status != 404 ? 'text-warning':'text-danger'}"></h1> -->
+	<div class="errorpage text-center">
+		<p th:text="${path}"></p>
+		<p th:text="${timestamp}"></p>
+		<!-- 
+		<p th:text="${'status: ' + status}"></p>
+		<p th:text="${'exception: ' + exception}"></p>
+		<p th:text="${'trace: ' + trace}"></p>
+		<p th:text="${'error: ' + error}"></p>
+		<p th:text="${'errors: ' + errors}"></p>
+		<p th:text="${'message: ' + message}"></p>
+		 -->
+	</div>
+
+	<script th:src="@{~/lib/jquery/jquery.min.js}"></script>
+	<script th:src="@{~/lib/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	
+</body>
+</html>

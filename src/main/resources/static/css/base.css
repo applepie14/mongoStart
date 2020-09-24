@@ -1,0 +1,42 @@
+.content {
+    width: 100%;
+    margin: auto;
+    padding: 3rem 10%;
+}
+/* ▼▼▼▼▼▼▼▼▼ 메뉴바 ▼▼▼▼▼▼▼▼ */
+ul.navbar-nav {
+    width: 100%;
+}
+a#navbarDropdown {
+    margin-top: .2rem;
+    padding: .3rem 1rem;
+    /* margin-top: auto; */
+}
+li.nav-item.active a {
+	font-weight: 900;
+	text-shadow: 1px 2px #333;
+}
+a.text-warning:focus,
+a.text-warning:hover {
+	color : #ffc107!important;
+	text-shadow: 1px 2px #000;
+}
+a.bg-warning:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warning:hover {
+	background : #ffc107!important;
+	font-weight: 900;
+}
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    float: none;
+}
+li.nav-item.ml-auto.dropdown {
+    position: absolute;
+    top: 0.5rem;
+    right: 10px;
+    list-style: none;
+    z-index: 9999;
+}
+/* ▲▲▲▲▲▲▲▲ 메뉴바 ▲▲▲▲▲▲▲▲ */
+.loginErrorMsgDiv {
+	min-height: 30px;
+}

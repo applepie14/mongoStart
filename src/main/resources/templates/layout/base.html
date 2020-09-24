@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html 
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta name="x-ua-compatible" content="IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/> 
+    -->
+	<meta charset="UTF-8">
+	
+	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+	<link th:href="@{~/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{~/css/base.css}" rel="stylesheet">
+	<link th:href="@{~/css/common.css}" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
+		<button class="navbar-toggler btn btn-sm btn-outline-secondary " type="button" data-toggle="collapse" data-target="#navbar">
+			<span class="navbar-toggler-icon float-right"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse font-noto-sans" id="navbar">
+			<ul class="navbar-nav ">
+				<li class="nav-item" th:classappend="${ #request.requestURI == '/' ? 'active':''}">
+					<a class="nav-link text-warning" th:href="'/'"  th:text="'HOME'"></a>
+				</li>
+				<li class="nav-item" th:classappend="${ #request.requestURI == '/memo' ? 'active':''}">
+					<a class="nav-link text-warning" th:href="'/memo'"  th:text="'MEMO'"></a>
+				</li>				
+				<li class="nav-item" th:classappend="${ #request.requestURI == '/guestbook' ? 'active':''}">
+					<a class="nav-link text-warning" th:href="'/guestbook'"  th:text="'GUESTBOOK'"></a>
+				</li>
+				<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+					<li class="nav-item" th:classappend="${ #request.requestURI == '/admin' ? 'active':''}">
+						<a class="nav-link text-light" th:href="'/admin'"  th:text="'ADMIN'"></a>
+					</li>
+				</th:block>		
+								
+			</ul>
+		</div>
+	</nav>
+	<th:block sec:authorize="isAuthenticated()">
+		<li class="nav-item ml-auto dropdown ">
+			<a	class="nav-link btn btn-sm btn-warning text-dark dropdown-toggle font-noto-sans" 
+				href="#" id="navbarDropdown" role="button" 
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[[${session.user.username}]]</a>
+			<div class="dropdown-menu dropdown-menu-right bg-warning text-right font-noto-sans" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item bg-warning text-dark font-14" href="#">기타</a>
+				<a class="dropdown-item bg-warning text-dark font-14" href="#">등등</a>
+				<div class="dropdown-divider text-dark"></div>
+				<a class="dropdown-item bg-warning text-dark font-14" href="/logout">로그아웃</a>
+			</div>
+		</li>
+	</th:block>
+	
+	<div class="content mt-5">
+		<th:block layout:fragment="content_body"></th:block>
+	</div>
+	<!-- End of Page Wrapper -->
+	<script th:src="@{~/lib/jquery/jquery.min.js}"></script>
+	<script th:src="@{~/lib/bootstrap/js/bootstrap.bundle.js}"></script>
+	<script th:src="@{~/lib/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
+	<script th:src="@{~/js/base.js}"></script>
+	
+	<!-- custom -->
+	<th:block layout:fragment="page_js"></th:block>
+</body>
+</html>
