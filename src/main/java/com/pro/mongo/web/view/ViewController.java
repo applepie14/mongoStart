@@ -27,6 +27,10 @@ public class ViewController {
 		return path;
 	}
 
+	@GetMapping("/member/reg")
+	public String reg() {
+		return "/member/reg";
+	}
 
 	@GetMapping("/login")
 	public String login(Principal principal) {

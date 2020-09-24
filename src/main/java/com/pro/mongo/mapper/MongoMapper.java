@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.repository.Query;
 import com.pro.mongo.vo.QuickGuideUserVO2;
 
 public interface MongoMapper extends MongoRepository<QuickGuideUserVO2, String>{
-	@Query(value = "{ 'user_id' : ?0 }", fields = "{'_id' : 0}")
-	QuickGuideUserVO2 getUserPros(String user_id);
+	
+	@Query("db.users.find().sort({'user_no' : -1}).limit(1)")
+	int getMaxUserNo();
 }

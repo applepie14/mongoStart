@@ -40,3 +40,22 @@ li.nav-item.ml-auto.dropdown {
 .loginErrorMsgDiv {
 	min-height: 30px;
 }
+
+/* ▼▼▼▼▼▼▼▼▼ 로그인 화면 ▼▼▼▼▼▼▼▼ */
+#loginForm button.login,
+#loginForm button.reg {
+	width: calc(50% - 5px);
+}
+#loginForm button.login{
+	margin-right : 5px;
+}
+#loginForm button.reg {
+	margin-left : 5px;
+}
+/* ▲▲▲▲▲▲▲▲ 로그인 화면 ▲▲▲▲▲▲▲▲ */
+
+/* ▼▼▼▼▼▼▼▼▼ 회원가입 화면 ▼▼▼▼▼▼▼▼ */
+.form-signin {
+	margin-top: 150px;
+}
+/* ▲▲▲▲▲▲▲▲ 회원가입 화면 ▲▲▲▲▲▲▲▲ */
