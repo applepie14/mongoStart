@@ -16,11 +16,13 @@
 				success: function (data) {
 					let idLabel  = $('.label-inputLoginId');
 					if(data > 0){
+						idLabel.data('confirm', false);
 						idLabel.text('사용 중인 아이디입니다.');
 						idLabel.addClass('text-danger');
 						idLabel.removeClass('text-success');
 					}
 					else{
+						idLabel.data('confirm', true);
 						idLabel.text('사용 가능한 아이디입니다.');
 						idLabel.removeClass('text-danger');
 						idLabel.addClass('text-success');
@@ -39,32 +41,17 @@
 		if (e.keyCode === 13) {
 			e.preventDefault();
 			reg();
-			$('#regForm').submit();
 		}
 	});
 	$('#regBtn').click(function(){ reg(); })
 	
 	function reg(){
-		let params = { 'reg_id' : $('#reg_id').val() }
-		params.reg_pwd = $('#reg_pwd').val();
-		params.reg_email = $('#reg_email').val();
-		params.reg_name = $('#reg_name').val();
-		
-		$.ajax({
-			type: "POST",
-			url: '/member/register',
-			data: params,
-			dataType:"html",
-			success: function (data) {
-				
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR.status);
-				console.debug(jqXHR.responseText);
-				console.log(errorThrown);
-			}
-		})
-		
+		let result = $('.label-inputLoginId').data('confirm');
+		if(result){
+			$('#regForm').submit();
+		}else{
+			alert('아이디를 변경하세요');
+		}
 	};
 	
 }(jQuery));

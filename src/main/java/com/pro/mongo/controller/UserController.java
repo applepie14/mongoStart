@@ -30,16 +30,14 @@ public class UserController {
 		params.put("reg_name", reg_name);
 		params.put("reg_email", reg_email);
 		params.put("reg_pwd", reg_pwd);
-		
-		log.info("############################## {} ", params);
+
 		ser.register(params);
 		response.sendRedirect("/login");
 	}
 
 	@PostMapping("/idCheck/{reg_id}")
 	public int idCheck(@PathVariable String reg_id) {
-		
-		return -1;
+		return ser.idCheck(reg_id);
 	}
 	
 }

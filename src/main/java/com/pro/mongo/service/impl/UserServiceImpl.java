@@ -38,9 +38,11 @@ public class UserServiceImpl implements UserService {
 		regUser.setUser_id((String)params.get("reg_id"));
 		regUser.setUser_name((String)params.get("reg_name"));
 		
+		// 비밀번호 암호화
 		String encryptPassword = passwordEncoder.encode((String)params.get("reg_pwd"));
 		regUser.setUser_pwd(encryptPassword);
 
+		// user_no을 주기 위한 최대값 구하기
 		Query query = new Query();
 		query.limit(1);
 		query.with(Sort.by(Sort.Direction.DESC, "user_no"));
@@ -48,20 +50,27 @@ public class UserServiceImpl implements UserService {
 		int maxUserNo = ((QuickGuideUserVO2)mongo.findOne(query, QuickGuideUserVO2.class, "users")).getUser_no() + 1;
 		regUser.setUser_no(maxUserNo);
 		
+		// 사용자 권한 설정(따로 설정하면 impl클래스가 같이 안 들어감)
 		UserRoleVO role = new UserRoleVO();
 		role.setRole("ROLE_USER");
 		List<UserRoleVO> rolesList = new ArrayList<UserRoleVO>(){{ add(role); }};
 		regUser.setUser_role(rolesList);
-		
+
+		// 사용자 프로젝트 범위 설정(따로 설정하면 impl클래스가 같이 안 들어감)
 	    UserProVO pro = new UserProVO();
 	    pro.setPro("MONGO_START");
 		List<UserProVO> ProsList = new ArrayList<UserProVO>(){{ add(pro); }};
 		regUser.setWith_pro(ProsList);
 		
-		
 		log.debug("{}", mongo.insert(regUser, "users"));
-		
 		return 0;
+	}
+	
+	@Override
+	public int idCheck(String reg_id) {
+		Query query = new Query(Criteria.where("user_id").is(reg_id));
+		List<QuickGuideUserVO2> userIdList = mongo.find(query, QuickGuideUserVO2.class, "users");
+		return userIdList.size();
 	}
 
 }

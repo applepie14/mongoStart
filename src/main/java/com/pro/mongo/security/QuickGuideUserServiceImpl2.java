@@ -38,7 +38,7 @@ public class QuickGuideUserServiceImpl2 implements UserDetailsService{
 		query.addCriteria(Criteria.where("with_pro.pro").in(arrayValue));
 		
 		QuickGuideUserVO2 user = mongo.findOne(query, QuickGuideUserVO2.class, "users");
-		log.info("############################## {} ", user);
+//		log.info("############################## {} ", user);
 				
 		if(user == null) {
 			throw new UsernameNotFoundException(login_id + "is not found.");
