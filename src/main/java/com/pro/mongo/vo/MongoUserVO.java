@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Document(collection="users")
 @Data
-public class QuickGuideUserVO2 {
+public class MongoUserVO {
 
 	private String user_name;
 	private int user_no;

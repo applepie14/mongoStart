@@ -5,18 +5,23 @@
 >
 <head>
 	<meta charset="UTF-8">
-	<title>메인</title>
-	<style>
-	</style>
+	<title>MEMO</title>
+	<link th:href="@{~/css/memo.css}" rel="stylesheet">
 </head>
 
 <body>
 	<th:block layout:fragment="content_body">
-		<h2 class="text-center mt-5">BaseIndex</h2>		
+	<div class="memoBody">
+		<div class="grid">
+		  
+		</div> <!-- Grid End -->
+	
+	</div>
 	</th:block>
 	
 	
 	<th:block layout:fragment="page_js">
+		<script th:src="@{~/js/memo.js}"></script>
 	</th:block>
 </body>
 </html>

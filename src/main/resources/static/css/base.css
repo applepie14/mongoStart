@@ -1,8 +1,4 @@
-.content {
-    width: 100%;
-    margin: auto;
-    padding: 3rem 10%;
-}
+
 /* ▼▼▼▼▼▼▼▼▼ 메뉴바 ▼▼▼▼▼▼▼▼ */
 ul.navbar-nav {
     width: 100%;
@@ -30,7 +26,7 @@ a.bg-warning:focus, a.bg-warning:hover, button.bg-warning:focus, button.bg-warni
     float: none;
 }
 li.nav-item.ml-auto.dropdown {
-    position: absolute;
+    position: fixed;
     top: 0.5rem;
     right: 10px;
     list-style: none;
@@ -59,3 +55,9 @@ li.nav-item.ml-auto.dropdown {
 	margin-top: 150px;
 }
 /* ▲▲▲▲▲▲▲▲ 회원가입 화면 ▲▲▲▲▲▲▲▲ */
+
+/*  */
+div.body {
+	margin: 10px;
+	margin-top: 70px;
+}

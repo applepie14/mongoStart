@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.pro.mongo.mapper.MongoMapper;
 import com.pro.mongo.service.UserService;
-import com.pro.mongo.vo.QuickGuideUserVO2;
+import com.pro.mongo.vo.MongoUserVO;
 import com.pro.mongo.vo.UserProVO;
 import com.pro.mongo.vo.UserRoleVO;
 
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int register(Map<String, Object> params) {
-		QuickGuideUserVO2 regUser = new QuickGuideUserVO2();
+		MongoUserVO regUser = new MongoUserVO();
 		regUser.setUser_email((String)params.get("reg_email"));
 		regUser.setUser_id((String)params.get("reg_id"));
 		regUser.setUser_name((String)params.get("reg_name"));
@@ -47,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		query.limit(1);
 		query.with(Sort.by(Sort.Direction.DESC, "user_no"));
 		
-		int maxUserNo = ((QuickGuideUserVO2)mongo.findOne(query, QuickGuideUserVO2.class, "users")).getUser_no() + 1;
+		int maxUserNo = ((MongoUserVO)mongo.findOne(query, MongoUserVO.class, "users")).getUser_no() + 1;
 		regUser.setUser_no(maxUserNo);
 		
 		// 사용자 권한 설정(따로 설정하면 impl클래스가 같이 안 들어감)
@@ -69,7 +68,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int idCheck(String reg_id) {
 		Query query = new Query(Criteria.where("user_id").is(reg_id));
-		List<QuickGuideUserVO2> userIdList = mongo.find(query, QuickGuideUserVO2.class, "users");
+		List<MongoUserVO> userIdList = mongo.find(query, MongoUserVO.class, "users");
 		return userIdList.size();
 	}
 

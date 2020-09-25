@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,9 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.pro.mongo.mapper.MongoMapper;
+import com.pro.mongo.vo.MongoUserVO;
 import com.pro.mongo.vo.QuickGuideUserVO;
-import com.pro.mongo.vo.QuickGuideUserVO2;
 import com.pro.mongo.vo.UserRoleVO;
 
 import lombok.RequiredArgsConstructor;
@@ -37,7 +34,7 @@ public class QuickGuideUserServiceImpl2 implements UserDetailsService{
 		Query query = new Query(Criteria.where("user_id").is(login_id));
 		query.addCriteria(Criteria.where("with_pro.pro").in(arrayValue));
 		
-		QuickGuideUserVO2 user = mongo.findOne(query, QuickGuideUserVO2.class, "users");
+		MongoUserVO user = mongo.findOne(query, MongoUserVO.class, "users");
 //		log.info("############################## {} ", user);
 				
 		if(user == null) {
