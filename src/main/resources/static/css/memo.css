@@ -10,8 +10,6 @@
 body {
 	color: #374046;
 	background-color: #374046;
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 1.15em;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 }

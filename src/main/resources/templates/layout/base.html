@@ -52,13 +52,60 @@
 				href="#" id="navbarDropdown" role="button" 
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[[${session.user.username}]]</a>
 			<div class="dropdown-menu dropdown-menu-right bg-warning text-right font-noto-sans" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item bg-warning text-dark font-14" href="#">기타</a>
-				<a class="dropdown-item bg-warning text-dark font-14" href="#">등등</a>
+				<a class="dropdown-item bg-warning text-dark font-14" id="MemoModalOpenBtn">메모 작성</a>
+				<a class="dropdown-item bg-warning text-dark font-14" th:href="'/guestbook/insert'">방명록 작성</a>
 				<div class="dropdown-divider text-dark"></div>
 				<a class="dropdown-item bg-warning text-dark font-14" href="/logout">로그아웃</a>
 			</div>
 		</li>
 	</th:block>
+	
+	<div class="modal" id="MemoModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header  bg-warning">
+					<h4 class="modal-title">NEW MEMO</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form id="memoForm">
+						<div class="form-group">
+							<select name="memoType" id="memoType" class="custom-select custom-select-sm">
+								<option value="" selected>MEMO TYPE</option>
+								<option value="blog">BLOG</option>
+								<option value="photo">PHOTO</option>
+								<option value="project">PROJECT</option>
+							</select>
+						</div>
+						<div class="form-group file-form">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input custom-file-input-sm" id="memoPhoto">
+								<label class="custom-file-label" for="memoPhoto">MEMO PHOTO</label>
+							</div>
+						</div>	
+						<div class="form-group">
+							<input type="email" class="form-control form-control-sm" placeholder="TITLE" id="memoTitle">
+						</div>
+						<div class="">
+							<textarea class="form-control form-control-sm" placeholder="MEMO CONTENT" id="memoContent"></textarea>
+						</div>
+					</form>	
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-outline-warning btn-sm" id="memoEnter">등록</button>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	
+	
 	
 	<div class="body">
 		<th:block layout:fragment="content_body"></th:block>

@@ -32,6 +32,9 @@ li.nav-item.ml-auto.dropdown {
     list-style: none;
     z-index: 9999;
 }
+#MemoModalOpenBtn {
+	cursor: pointer;
+}
 /* ▲▲▲▲▲▲▲▲ 메뉴바 ▲▲▲▲▲▲▲▲ */
 .loginErrorMsgDiv {
 	min-height: 30px;
@@ -43,10 +46,10 @@ li.nav-item.ml-auto.dropdown {
 	width: calc(50% - 5px);
 }
 #loginForm button.login{
-	margin-right : 5px;
+	margin-left : 5px;
 }
 #loginForm button.reg {
-	margin-left : 5px;
+	margin-right : 5px;
 }
 /* ▲▲▲▲▲▲▲▲ 로그인 화면 ▲▲▲▲▲▲▲▲ */
 

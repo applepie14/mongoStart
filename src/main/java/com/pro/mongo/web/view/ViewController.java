@@ -20,14 +20,19 @@ public class ViewController {
 		return "index";
 	}
 
-	@GetMapping("/{path}")
-	public String home(@PathVariable String path) {
-		return path;
+	@GetMapping("/memo")
+	public String memo() {
+		return "memo/memo";
 	}
 
+	@GetMapping("/guestbook")
+	public String gusbook() {
+		return "guestbook/guestbook";
+	}
+	
 	@GetMapping("/member/reg")
 	public String reg() {
-		return "/member/reg";
+		return "member/reg";
 	}
 
 	@GetMapping("/login")
@@ -38,4 +43,5 @@ public class ViewController {
 			return "login";
 		}
 	}
+
 }
