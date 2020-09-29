@@ -13,6 +13,7 @@ public class MemoVO {
 	@Id
 	ObjectId _id;
 	
+	String objectId;
 	String user_id;
 	String type;
 	String title;

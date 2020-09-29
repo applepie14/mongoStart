@@ -3,7 +3,6 @@
  */
 (function ($) {
 	setMemo();
-	
 }(jQuery));
 function resizeGridItem(item){
   grid = document.getElementsByClassName("grid")[0];
@@ -22,7 +21,7 @@ function resizeAllGridItems(){
 
 function resizeInstance(instance){
 	item = instance.elements[0];
-  resizeGridItem(item);
+	resizeGridItem(item);
 }
 
 window.onload = resizeAllGridItems();
@@ -43,32 +42,58 @@ function setMemo(){
 				const title = i.title;
 				const img = i.img;
 				const desc = i.desc;
-				const _id = i._id;
 				
 				let ifImg = ``;
-				if(img != null){
+				if(img != null && img != ''){
 					ifImg = `<img class="photothumb" src="/mongoboard/${img}">`;
 				}
 				
-				$('div.grid').append(
-				 `<div class="item ${type}">
+				let item =  `<div class="item ${type}">
 				    <div class="content">
 				      <div class="title">
 				        <h3>${title}</h3>
+					    <div class="editMemo font-12 font-noto-sans">EDIT</div>
 				      </div>
 				      ${ifImg}
 				      <div class="desc">
 				        <p>${desc}</p>
 				      </div>
 				    </div>
-				  </div>`
-				)
+				  </div>`;
+				let $item = $(item).data(i);
+				
+				$('div.grid').append($item);
 				
 			})
 			window.onload = resizeAllGridItems();
 			window.addEventListener("resize", resizeAllGridItems);
 
 			allItems = document.getElementsByClassName("item");
+
+			$('.editMemo').click(function(){
+				$('#memoEnter').addClass('d-none');
+				$('#memoUpdate').removeClass('d-none');
+				$('#memoDelete').removeClass('d-none');
+				
+				let modal = $('#MemoModal')
+				let data = $(this).parent().parent().parent().data();
+				
+				modal.data('isNew', false);
+				$('#memoType').val(data['type']);
+				$('#memoTitle').val(data['title']);
+				$('#memoContent').val(data['desc']);
+				$('.richText-editor').html(data['desc']);
+				$('.custom-file-label').html(data['img']);
+
+				if(!($('#memoType').val() == 'photo')){
+					$(".file-form").addClass("d-none");
+				}else{
+					$(".file-form").removeClass("d-none");
+				}
+				modal.data('memoObjectId',data['objectId']);
+				modal.modal('show');
+			})
+			
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(jqXHR.status);

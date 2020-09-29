@@ -43,7 +43,9 @@ body {
 .photo .title{
   background-color: #f44336;
 }
-
+.content {
+    background: #fff;
+}
 .desc{
 	background: #fff;
 	padding: 10px 10px 5px 10px;
@@ -58,3 +60,17 @@ body {
 .desc p{
   margin-bottom: 10px;
 }
+.editMemo {
+	cursor: pointer;
+    margin-top: 0px;
+    margin-right: -15px;
+    float: right;
+}
+.editMemo:hover {
+	color : #fff;
+}
+textarea#memoContent {
+    min-height: 300px;
+    max-height: 300px;
+}
+
