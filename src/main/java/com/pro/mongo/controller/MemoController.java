@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mongodb.client.result.DeleteResult;
 import com.pro.mongo.service.MemoService;
 import com.pro.mongo.vo.QuickGuideUserVO;
 
@@ -41,12 +42,26 @@ public class MemoController {
 		return memo.insertMemo(user.getId(), memoPhoto, params);
 	}
 	@PostMapping("/update")
-	int updateMemo(
+	Map<String, Object> updateMemo(
 		@AuthenticationPrincipal QuickGuideUserVO user, 
 		@RequestParam Map<String, Object> params,
-		MultipartFile memoPhoto
+		MultipartFile memoPhoto,
+		HttpServletResponse response
 	) throws Exception {
-		return memo.updateMemo(user.getId(), memoPhoto, params);
+		Map<String, Object> result = new HashMap<>();
+
+		try {
+			if (memo.updateMemo(user.getId(), memoPhoto, params) >  0) {
+				result.put("code", 204);
+				result.put("result", "UPDATE");
+			}
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			result.put("code", 500);
+			result.put("result", "FAILURE");
+			result.put("msg", e.getMessage());
+		}
+		return result;
 	}
 	
 	@DeleteMapping("/delete/{params}")
@@ -58,7 +73,8 @@ public class MemoController {
 		Map<String, Object> result = new HashMap<>();
 
 		try {
-			if (memo.deleteMemo(user.getId(), params).getDeletedCount() > 0) {
+			DeleteResult msg = memo.deleteMemo(user.getId(), params);
+			if (msg.getDeletedCount() > (long) 0) {
 				result.put("code", 204);
 				result.put("result", "DELETE");
 			}

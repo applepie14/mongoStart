@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import com.pro.mongo.service.MemoService;
 import com.pro.mongo.vo.MemoVO;
 
@@ -115,16 +116,17 @@ public class MemoServiceImpl implements MemoService {
 			update.set("img","");
 		}
 		
-		log.debug("# {}", mongo.upsert(query, update, "blogs"));
+		UpdateResult msg = mongo.upsert(query, update, "blogs");
+		log.debug("# {}", msg);
 		
-		Query query2 = new Query(Criteria.where("user_id").is(login_id));
-		return (int) mongo.count(query2, "blogs");
+		return (int) msg.getModifiedCount();
 	}
 	
 	@Override
 	public DeleteResult deleteMemo(String login_id, String params) throws Exception {
 		Query query = new Query(Criteria.where("_id").is(new ObjectId(params)));
-		return mongo.remove(query, "blogs");
+		DeleteResult msg = mongo.remove(query, "blogs");
+		return msg;
 	}
 	String makeImgName(String id, ObjectId _id, String ext) {
 		return "memoImage_" + id + "_" + _id.toString() + "." + ext;
