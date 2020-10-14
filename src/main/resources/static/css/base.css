@@ -32,7 +32,7 @@ li.nav-item.ml-auto.dropdown {
     list-style: none;
     z-index: 9999;
 }
-#MemoModalOpenBtn {
+.dropdown-menu.dropdown-menu-right.bg-warning.text-right.font-noto-sans a{
 	cursor: pointer;
 }
 /* бубубубубубубубу ╕▐┤║╣┘ бубубубубубубубу */

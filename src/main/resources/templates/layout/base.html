@@ -14,12 +14,13 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/> 
     -->
 	
-	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">moonapple's 메모/방명록</title>
 	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 	<link th:href="@{~/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 	
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link th:href="@{~/lib/richtext/css/richtext.min.css}" rel="stylesheet">
+	<link th:href="@{~/lib/simditor/css/simditor.css}" rel="stylesheet">
 	
 	<link th:href="@{~/css/base.css}" rel="stylesheet">
 	<link th:href="@{~/css/common.css}" rel="stylesheet">
@@ -57,7 +58,6 @@
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[[${session.user.username}]]</a>
 			<div class="dropdown-menu dropdown-menu-right bg-warning text-right font-noto-sans" aria-labelledby="navbarDropdown">
 				<a class="dropdown-item bg-warning text-dark font-14" id="MemoModalOpenBtn">메모 작성</a>
-				<a class="dropdown-item bg-warning text-dark font-14" th:href="'/guestbook/insert'">방명록 작성</a>
 				<div class="dropdown-divider text-dark"></div>
 				<a class="dropdown-item bg-warning text-dark font-14" href="/logout">로그아웃</a>
 			</div>
@@ -113,6 +113,7 @@
 	
 	
 	
+	
 	<div class="body">
 		<th:block layout:fragment="content_body"></th:block>
 	</div>
@@ -121,6 +122,10 @@
 	<script th:src="@{~/lib/bootstrap/js/bootstrap.bundle.js}"></script>
 	<script th:src="@{~/lib/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
 	<script th:src="@{~/lib/richtext/js/jquery.richtext.min.js}"></script>
+	<script th:src="@{~/lib/simditor/js/module.js}"></script>
+	<script th:src="@{~/lib/simditor/js/hotkeys.js}"></script>
+	<script th:src="@{~/lib/simditor/js/uploader.js}"></script>
+	<script th:src="@{~/lib/simditor/js/simditor.js}"></script>
 	<script th:src="@{~/js/base.js}"></script>
 	
 	<!-- custom -->

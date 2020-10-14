@@ -5,18 +5,82 @@
 >
 <head>
 	<meta charset="UTF-8">
-	<title>메인</title>
-	<style>
-	</style>
+	<title>방명록</title>
+	<link th:href="@{~/css/guestbook.css}" rel="stylesheet">
 </head>
 
 <body>
 	<th:block layout:fragment="content_body">
-		<h2 class="text-center mt-5">BaseIndex</h2>		
+		
+		<div class="py-5 col-7 m-auto" id="commentBox">
+			<div class="row">
+				<div class="col-4">
+					<div class="input-group mb-3">
+							<select id="userList" class="custom-select">
+								<option value="" selected>USERS</option>
+							</select>
+							<div class="input-group-append">
+								<span class="input-group-text">'S 방명록</span>
+							</div>
+					</div>
+				</div>
+				<div class="col-2 offset-6">
+					<a class="btn btn-warning btn-block text-dark font-14" data-toggle="modal" data-target="#GuestbookModal">방명록 작성</a>
+				</div>
+			</div>
+<!-- 			<div class="card mt-3 ">
+				<div class="card-body">
+					<h5 class="card-title">Card title</h5>
+					<p class="card-text"></p>
+					<div class="comments px-3">
+						<div class="comment">
+							<h6 class="comment-auth">hy</h6>
+							<p class="comment-text card-text"></p>
+						</div>
+					</div>
+					<div class="live-comment-div mt-3">
+						<textarea class="form-control"></textarea>
+						<button class="btn btn-warning">COMMENT</button>
+					</div>
+    			</div>
+			</div> -->
+		
+		</div>	
+		
+	<div class="modal fade" id="GuestbookModal">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header  bg-warning">
+					<h4 class="modal-title">NEW GUESTBOOK</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form id="guestForm">
+						<select id="modalUserList" class="custom-select">
+							<option value="" selected>USERS</option>
+						</select>
+						<div class="pt-3">
+							<textarea class="form-control form-control-sm" placeholder="CONTENT" id="send_content"></textarea>
+						</div>
+					</form>	
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-outline-warning btn-sm" id="guestbookEnter">등록</button>
+				</div>
+			
+			</div>
+		</div>
+	</div>
 	</th:block>
 	
 	
 	<th:block layout:fragment="page_js">
+		<script th:src="@{~/js/guestbook.js}"></script>
 	</th:block>
 </body>
 </html>

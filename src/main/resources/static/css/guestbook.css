@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+::-webkit-scrollbar { width: 10px; height: 10px;}
+::-webkit-scrollbar-track { background: #f1f1f1;}
+::-webkit-scrollbar-thumb { background: #888; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+.live-comment-div *{
+    display: inline-block;
+}
+.live-comment-div > textarea.form-control{
+    width: 85%;
+    max-height: 100px;
+    height: 100px;
+    resize: none;
+}
+.live-comment-div > button.btn.btn-warning {
+	float: right;
+    width: calc(15% - 5px);
+    max-height: 100px;
+    height: 100px;
+}
+textarea#send_content {
+    height: 150px;
+}
+/* .comments {
+    max-height: 100px;
+    overflow: auto;
+} */

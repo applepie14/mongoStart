@@ -185,4 +185,3 @@ function hexTorgba(h, opacity){
 $('#MemoModalOpenBtn').click(function(){
 	$('#MemoModal').modal('show');
 })
-
