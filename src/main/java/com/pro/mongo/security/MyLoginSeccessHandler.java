@@ -21,7 +21,7 @@ public class MyLoginSeccessHandler implements AuthenticationSuccessHandler {
 		//log.info("@@@@@@@@@@@@@@@@@@@@@\n"+((QuickGuideUserVO)authentication.getPrincipal()).getUser().toString());
 		session.setAttribute("user", authentication.getPrincipal());
 
-		response.sendRedirect("/");
+		response.sendRedirect("/memo");
 	}
 
 }

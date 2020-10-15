@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mongodb.client.result.DeleteResult;
 import com.pro.mongo.service.GuestbookService;
 import com.pro.mongo.vo.GuestbookVO;
 import com.pro.mongo.vo.QuickGuideUserVO;
@@ -109,6 +111,27 @@ public class GuestbookContoroller {
 				result.put("code", 204);
 				result.put("result", "INSERT");
 				result.put("addGuestbookCommentResult", addGuestbookCommentResult);
+			}
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			result.put("code", 500);
+			result.put("result", "FAILURE");
+			result.put("msg", e.getMessage());
+		}
+		return result;
+	}
+	@DeleteMapping("/delete")
+	public Map<String, Object> deleteGuestbook(
+		@RequestParam Map<String, Object> params,
+		HttpServletResponse response
+	){
+		Map<String, Object> result = new HashMap<>();
+
+		try {
+			DeleteResult msg = ser.deleteGuestbook((String)params.get("objid"));
+			if (msg.getDeletedCount() > (long) 0) {
+				result.put("code", 204);
+				result.put("result", "DELETE");
 			}
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

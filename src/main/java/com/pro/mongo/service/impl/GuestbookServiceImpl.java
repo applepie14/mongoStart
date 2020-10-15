@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.client.result.DeleteResult;
 import com.pro.mongo.service.GuestbookService;
 import com.pro.mongo.vo.GuestbookVO;
 import com.pro.mongo.vo.MongoUserVO;
@@ -78,5 +79,12 @@ public class GuestbookServiceImpl implements GuestbookService {
 		GuestbookVO result = mongo.findAndModify(query, update, GuestbookVO.class, "guestbook");
 		params.put("result", result);
 		return params;
+	}
+
+	@Override
+	public DeleteResult deleteGuestbook(String params){
+		Query query = new Query(Criteria.where("_id").is(new ObjectId(params)));
+		DeleteResult msg = mongo.remove(query, "guestbook");
+		return msg;
 	}
 }

@@ -22,6 +22,11 @@
 textarea#send_content {
     height: 150px;
 }
+.editDiv i {
+    display: inline-block;
+    margin: 0 4px;
+    font-size: 17px;
+}
 /* .comments {
     max-height: 100px;
     overflow: auto;

@@ -15,11 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ViewController {
 
 
-	@GetMapping("/")
-	public String view() {
-		return "index";
-	}
-
 	@GetMapping("/memo")
 	public String memo() {
 		return "memo/memo";
@@ -38,7 +33,7 @@ public class ViewController {
 	@GetMapping("/login")
 	public String login(Principal principal) {
 		if (principal != null) {
-			return "redirect:/";
+			return "redirect:/memo";
 		} else {
 			return "login";
 		}

@@ -91,7 +91,10 @@ function getGuestbookList(userId){
 				})
 				let str = `<div class="card mt-3 ">
 								<div class="card-body">
-									<h5 class="card-title"><i class="fa fa-commenting-o"></i> ${result.send_user}<span class="font-12 ml-3 font-weight-light">${result.send_dttm}</span></h5>
+									<h5 class="card-title">
+										${result.send_user}<span class="font-12 ml-3 font-weight-light">${result.send_dttm}</span>
+										<div class="editDiv float-right" data-objid="${result.objectId}"><i class="fa fa-trash-o"></i></div>
+									</h5>
 									<p class="card-text">${result.send_content}</p>
 									<div class="comments">
 										${str_comments}
@@ -111,30 +114,60 @@ function getGuestbookList(userId){
 						'send_content' : $(this).prev().val()
 					};
 				let $this = $(this);
-				$.ajax({
-					type: "POST",
-					url: '/guestbook/addGuestbookComments',
-					data: params,
-					success: function (data) {
-//						console.log(data);
-						let result = data.addGuestbookCommentResult;
-						let str_comments = 
-							`<div class="comment pt-3 px-3">
-								<h6 class="comment-auth"><i class="fa fa-comments-o"></i> ${result.send_user}<span class="font-11 ml-3 font-weight-light">${result.send_dttm}</span></h6>
-								<p class="comment-text card-text">${result.send_content}</p>
-							</div>`;
-						
-						$($this).parent().prev().append(str_comments);
-						$($this).prev().val('');
-					},
-					error: function (jqXHR, textStatus, errorThrown) {
-						console.log(jqXHR.status);
-						console.log(jqXHR.responseText);
-						console.log(errorThrown);
+				if(params.send_content != ''){
+					$.ajax({
+						type: "POST",
+						url: '/guestbook/addGuestbookComments',
+						data: params,
+						success: function (data) {
+	//						console.log(data);
+							let result = data.addGuestbookCommentResult;
+							let str_comments = 
+								`<div class="comment pt-3 px-3">
+									<h6 class="comment-auth"><i class="fa fa-comments-o"></i> ${result.send_user}<span class="font-11 ml-3 font-weight-light">${result.send_dttm}</span></h6>
+									<p class="comment-text card-text">${result.send_content}</p>
+								</div>`;
+							
+							$($this).parent().prev().append(str_comments);
+							$($this).prev().val('');
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.log(jqXHR.status);
+							console.log(jqXHR.responseText);
+							console.log(textStatus);
+							console.log(errorThrown);
+						}
+					})
+				}else{
+					alert('댓글을 작성해주세요.');
+				}
+			});
+			
+			$('.editDiv i').click(function(){
+				let className = $(this).attr('class');
+				let $this = $(this);
+				if(className.indexOf('trash') > 0){
+					// 삭제
+					let deleteConfirm = confirm('삭제하시겠습니까?'); 
+					if(confirm){
+						$.ajax({
+							type: "DELETE",
+							url: '/guestbook/delete',
+							data: { 'objid' : $(this).parent().data('objid') },
+							success: function (data) {
+								$($this).parent().parent().parent().parent().remove();
+							},
+							error: function (jqXHR, textStatus, errorThrown) {
+								console.log(jqXHR.status);
+								console.log(jqXHR.responseText);
+								console.log(textStatus);
+								console.log(errorThrown);
+							}
+						})
 					}
-				})
-			})
-
+				}
+				
+			});
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(jqXHR.status);
