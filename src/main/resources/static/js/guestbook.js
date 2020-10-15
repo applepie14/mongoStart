@@ -89,11 +89,18 @@ function getGuestbookList(userId){
 							<p class="comment-text card-text">${j.send_content}</p>
 						</div>`;
 				})
+				let deleteContent = '';
+				if(userSession == result.send_user){
+					deleteContent =`<div class="editDiv float-right" data-objid="${result.objectId}">
+						<i class="fa fa-trash-o"></i>
+					</div>`;
+				}
+				
 				let str = `<div class="card mt-3 ">
 								<div class="card-body">
 									<h5 class="card-title">
 										${result.send_user}<span class="font-12 ml-3 font-weight-light">${result.send_dttm}</span>
-										<div class="editDiv float-right" data-objid="${result.objectId}"><i class="fa fa-trash-o"></i></div>
+										${deleteContent}
 									</h5>
 									<p class="card-text">${result.send_content}</p>
 									<div class="comments">
@@ -149,7 +156,7 @@ function getGuestbookList(userId){
 				if(className.indexOf('trash') > 0){
 					// 삭제
 					let deleteConfirm = confirm('삭제하시겠습니까?'); 
-					if(confirm){
+					if(deleteConfirm){
 						$.ajax({
 							type: "DELETE",
 							url: '/guestbook/delete',

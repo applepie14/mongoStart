@@ -45,8 +45,7 @@
     			</div>
 			</div> -->
 		
-		</div>	
-		
+		</div>
 	<div class="modal fade" id="GuestbookModal">
 		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content">
@@ -82,6 +81,7 @@
 	
 	<th:block layout:fragment="page_js">
 		<script th:src="@{~/js/guestbook.js}"></script>
+		<script>var userSession = '[[${session.user.id}]]'</script>
 	</th:block>
 </body>
 </html>
